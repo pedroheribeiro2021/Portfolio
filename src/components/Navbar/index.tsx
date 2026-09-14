@@ -12,6 +12,7 @@ import {
 
 import { FaBars } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
+import { useI18n } from "@/utils/i18n";
 import { Button } from "@/styles/Buttons";
 import { Container, Flex } from "@/styles/Global";
 
@@ -21,10 +22,9 @@ export interface MenuButtonOpen {
 }
 
 export const NavBar = (): JSX.Element => {
+  const { locale, setLocale, t } = useI18n();
 
   const isWide = useMedia({ maxWidth: "991px" });
-
-  document.title = userData.nameUser;
 
   const [open, setOpen] = useState(false);
 
@@ -52,25 +52,31 @@ export const NavBar = (): JSX.Element => {
         <Flex>
           {isWide ? open && <NavLinks /> : <NavLinks />}
         </Flex>
+        <select aria-label={t("language")} value={locale} onChange={(event) => setLocale(event.target.value as typeof locale)}>
+          <option value="pt-BR">PT</option>
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+        </select>
       </Container>
     </NavbarWrapper>
   );
 };
 
 export const NavLinks = (): JSX.Element => {
+  const { t } = useI18n();
   return (
     <NavbarLinks>
       <Button type="btLink" as="a" color="grey4" href={`#home`}>
-        Home
+        {t("home")}
       </Button>
       <Button type="btLink" as="a" color="grey4" href={`#projects`}>
-        Projetos
+        {t("projects")}
       </Button>
       <Button type="btLink" as="a" color="grey4" href={`#contact`}>
-        Contato
+        {t("contact")}
       </Button>
       <Button type="btLink" as="a" color="grey4" href={`#social-media`}>
-        Redes Sociais
+        {t("social")}
       </Button>
     </NavbarLinks>
   );

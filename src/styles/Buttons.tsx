@@ -50,7 +50,11 @@ export const Button = styled("button", {
           color: "$grey1",
         },
       },
-      toggleTheme: {
+      themeToggle: {
+        position: "fixed",
+        right: "1rem",
+        bottom: "1rem",
+        zIndex: 100000,
         height: "2.2rem",
         minWidth: "3rem",
         maxWidth: "3rem",
@@ -59,34 +63,9 @@ export const Button = styled("button", {
         borderColor: "$grey4",
         color: "$grey4",
         backgroundColor: "transparent",
-        position: "relative",
-        "&::before": {
-          content: "",
-          width: "1.5rem",
-          height: "1.5rem",
+        "&:hover, &:focus-visible": {
           backgroundColor: "$grey4",
-          position: "absolute",
-          left: "0.25rem",
-          borderRadius: "50%",
-        },
-        "&::after": {
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-end",
-
-          content: "🌙",
-          height: "100%",
-          width: "100%",
-          backgroundColor: "",
-          right: "0.25rem",
-          position: "absolute",
-          borderRadius: "50%",
-        },
-
-        "@mobile": {
-          position: "absolute",
-          right: "5rem",
-          top: "0.375rem",
+          color: "$grey1",
         },
       },
 

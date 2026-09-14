@@ -11,30 +11,30 @@ import { Text } from "@/styles/Text";
 import { useEffect, useState } from "react";
 import { FaGithub, FaShare } from "react-icons/fa";
 import { userData } from "@/utils/userData";
-
-interface ReposType {
-  id: number;
-  name: string;
-  language: string;
-  description: string;
-  html_url: string;
-  homepage: string;
-}
+import { useI18n } from "@/utils/i18n";
+import { featuredProjects, ProjectData } from "@/utils/projectData";
 
 export const Project = (): JSX.Element => {
-  const [repositories, setRepositories] = useState<ReposType[]>([]);
+  const { t } = useI18n();
+  const [repositories, setRepositories] = useState<ProjectData[]>(featuredProjects);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetch(
-        `https://api.github.com/users/${userData.githubUser}/repos?sort=created&direction=desc`
-      );
-
-      const json = await data.json();
-
-      setRepositories(json);
-
-      return json;
+      try {
+        const response = await fetch(
+          `https://api.github.com/users/${userData.githubUser}/repos?sort=created&direction=desc`
+        );
+        if (!response.ok) throw new Error(`GitHub API returned ${response.status}`);
+        const json: ProjectData[] = await response.json();
+        setRepositories([...featuredProjects, ...json]);
+      } catch (requestError) {
+        console.error("Unable to load GitHub repositories", requestError);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchData();
@@ -42,6 +42,8 @@ export const Project = (): JSX.Element => {
 
   return (
     <>
+      {loading && <Text type="body1" color="grey2">{t("loading")}</Text>}
+      {error && <Text type="body1" color="grey2">{t("githubError")}</Text>}
       {repositories &&
         repositories?.map?.((repository) => (
           <ProjectWrapper key={repository.id}>
@@ -56,7 +58,7 @@ export const Project = (): JSX.Element => {
 
             <ProjectStack>
               <Text type="body2" color="grey2">
-                Primary Language:
+                {t("primaryLanguage")}
               </Text>
               {repository.language ? (
                 <ProjectStackTech>
@@ -67,25 +69,28 @@ export const Project = (): JSX.Element => {
               ) : (
                 <ProjectStackTech>
                   <Text color="grey2" type="body2">
-                    Primary language not identified
+                    {t("languageUnknown")}
                   </Text>
                 </ProjectStackTech>
               )}
             </ProjectStack>
 
             <Text type="body1" color="grey2">
-              {repository.description?.substring(0, 129)}
+              {repository.description || t("languageUnknown")}
             </Text>
             <ProjectLinks>
-              <ProjectLink target="_blank" href={repository.html_url}>
-                <FaGithub /> Github Code
-              </ProjectLink>
+              {repository.html_url && (
+                <ProjectLink target="_blank" rel="noopener noreferrer" href={repository.html_url}>
+                  <FaGithub /> {t("githubCode")}
+                </ProjectLink>
+              )}
               {repository.homepage && (
                 <ProjectLink
                   target="_blank"
+                  rel="noopener noreferrer"
                   href={`${repository.homepage}`}
                 >
-                  <FaShare /> See demo
+                  <FaShare /> {t("demo")}
                 </ProjectLink>
               )}
             </ProjectLinks>

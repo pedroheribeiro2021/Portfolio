@@ -28,8 +28,10 @@ import {
   AboutMeArea,
 } from "./style";
 import { TypeWriter } from "@/components/Typewriter";
+import { useI18n } from "@/utils/i18n";
 
 export const Home = (): JSX.Element => {
+  const { t } = useI18n();
   const gihubUrl = `https://github.com/${userData.githubUser}`;
   const portfolioUrl = `https://github.com/${userData.githubUser}/Portifolio-V1`;
 
@@ -46,28 +48,28 @@ export const Home = (): JSX.Element => {
                 width={"48px"}
                 height={"48px"}
               />
-              <TypeWriter text="Olá, meu nome é Pedro :)" hideCursor delay={100}/>
+              <TypeWriter text={t("greeting")} hideCursor delay={100}/>
             </Flex>
             <Text as="h1" type="heading1" color="grey5">
-            Eu{" "}
+            {t("passion")}{" "}
               <Text as="span" type="heading1" color="brand1">
-                Adoro
+                {t("passionHighlight")}
               </Text>{" "}
-              criar e{" "}
+              {t("passionEnd")}{" "}
               <Text as="span" type="heading1" color="brand1">
-                desenvolver
+                {t("develop")}
               </Text>{" "}
-              projetos
+              {t("projectsEnd")}
             </Text>
             <Text type="body1" color="grey2">
-              Descubra aqui neste ambiente, criado especialmente para você, todos meus projetos e tecnologias
+              {t("intro")} {t("discover")}
             </Text>
             <HeaderButtonsArea>
               <Button as="a" type="primary" href="#projects">
-                Projetos
+                {t("viewProjects")}
               </Button>
-              <Button as="a" type="outline" target="_blank" href={portfolioUrl}>
-                Código do portifólio
+              <Button as="a" type="outline" target="_blank" rel="noopener noreferrer" href={portfolioUrl}>
+                {t("portfolioCode")}
               </Button>
               <Button
                 color="grey5"
@@ -75,6 +77,8 @@ export const Home = (): JSX.Element => {
                 css={{ "&:hover": { color: "$grey1" } }}
                 type="circle"
                 target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
                 href={gihubUrl}
               >
                 <FaGithub />
@@ -91,15 +95,12 @@ export const Home = (): JSX.Element => {
       <AboutMeArea>
         <Container>
           <Text as="h2" type="heading2" color="grey4">
-            Sobre mim
+            {t("about")}
           </Text>
           <Text as="p" type="body1" color="grey2">
-            Sou um desenvolvedor fullstack fascinado por tecnologia e as infinitas possibilidades que ela oferece. Dedico meus esforços sempre para me atualizar e aprimorar minhas habilidades. Sou uma pessoa comunicativa, criativa, curiosa e com interesse em aprender sempre, buscando novos desafios e oportunidades de crescimento profissional.
-            <br />
-            Hoje, tenho experiência em criar websites e aplicações web responsivas e funcionais, com habilidades em HTML, CSS, JavaScript, Typescript, React, na parte de front-end. Na parte de back-end utilizo NodeJs, Python com Django, e bancos de dados relacionais, além de diversas ferramentas que auxiliam no desenvolvimento dos projetos. Além disso, sou familiarizado com SCRUM.
-            <br />
-            Tive também um breve momento em que repassei o meu conhecimento para os alunos da Kenzie Academy Brasil trabalhando como monitor, foi uma experiência incrível e enriquecedora. 
-            Estou sempre em busca de novos desafios e oportunidades para trabalhar em projetos em equipe e colaborar com outros profissionais da área. Vamos trabalhar juntos?
+            {t("aboutText")}
+            <br /><br />
+            {t("aboutText2")}
           </Text>
         </Container>
       </AboutMeArea>
@@ -108,13 +109,10 @@ export const Home = (): JSX.Element => {
           <ProjectAreaWrapperColumns>
             <ProjectsAreaSocialMediaMessage>
               <Text as="h2" type="heading4" color="grey4">
-                Meus projetos
+                {t("myProjects")}
               </Text>
               <Text as="p" type="body1" color="grey2">
-                Alguns dos meus{" "}
-                <Text as="span" color="brand5">
-                  projetos particulares
-                </Text>
+                {t("projectsDescription")}
               </Text>
             </ProjectsAreaSocialMediaMessage>
             <ProjectsAreaContent>
