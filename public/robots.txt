@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://portifolio-v1-liard.vercel.app/sitemap.xml
+Sitemap: https://portfolio-pedro.vercel.app/sitemap.xml
