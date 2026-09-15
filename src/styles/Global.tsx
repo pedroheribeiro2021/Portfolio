@@ -3,7 +3,17 @@ import { ReactNode } from "react";
 
 interface GlobalStyleProps {
   children: ReactNode;
+  dark?: boolean;
 }
+
+const darkTheme = createTheme({
+  colors: {
+    brand1: "#65d6c8", brand2: "#2b8f87", grey0: "#f7f3ed", grey1: "#e9e3da",
+    grey2: "#4b5563", grey3: "#1f2937", grey4: "#101827", grey5: "#182334",
+    grey6: "#d1d5db", socialInstagram: "#CF50AC", socialFacebook: "#506CCF",
+    socialLinkedin: "#0E76A8", whiteFixed: "#ffffff", mode: "#101827",
+  },
+});
 
 export const Container = styled("div", {
   maxWidth: "$container",
@@ -78,9 +88,13 @@ export const globalStyles = globalCss({
     scrollBehavior: "smooth",
   },
   a: { textDecoration: "none" },
+  "button:focus-visible, a:focus-visible, select:focus-visible": {
+    outline: "3px solid $brand1",
+    outlineOffset: "3px",
+  },
 });
 
-export const GlobalStyle = ({ children }: GlobalStyleProps): JSX.Element => {
+export const GlobalStyle = ({ children, dark = false }: GlobalStyleProps): JSX.Element => {
 
   const theme = createTheme({
     colors: {
@@ -165,5 +179,5 @@ export const GlobalStyle = ({ children }: GlobalStyleProps): JSX.Element => {
     minHeight: "100vh",
   });
 
-  return <App className={theme}>{children}</App>;
+  return <App className={`${theme} ${dark ? darkTheme : ""}`}>{children}</App>;
 };

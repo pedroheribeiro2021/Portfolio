@@ -5,9 +5,11 @@ import { UserImage } from "@/pages/home/style";
 import { userData } from "@/utils/userData";
 import { FaLinkedinIn, FaInstagram, FaFacebookF } from "react-icons/fa";
 import { Button } from "@/styles/Buttons";
+import { useI18n } from "@/utils/i18n";
 // import { HandEffect } from "../HandEffect";
 
 export const Footer = (): JSX.Element => {
+  const { t } = useI18n();
   return (
     <FooterWrapper id="social-media">
       <Container>
@@ -21,10 +23,10 @@ export const Footer = (): JSX.Element => {
           />
           <Box css={{ marginLeft: "$2" }}>
             <Text type="heading4" color="grey5" css={{ marginBottom: "$2" }}>
-              Muito obtigado! {/* <HandEffect /> */}
+              {t("thanks")} {/* <HandEffect /> */}
             </Text>
             <Text type="body1" color="grey2">
-              Me siga nas minhas redes e vamos conversar
+              {t("follow")}
             </Text>
           </Box>
         </Flex>
@@ -40,6 +42,8 @@ export const Footer = (): JSX.Element => {
             type="circle"
             as="a"
             target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
             href={`https://instagram.com/${userData.instagramUser}`}
           >
             <FaInstagram />
@@ -49,6 +53,8 @@ export const Footer = (): JSX.Element => {
             type="circle"
             as="a"
             target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
             href={`https://fb.com/${userData.facebookUser}`}
           >
             <FaFacebookF />
@@ -58,6 +64,8 @@ export const Footer = (): JSX.Element => {
             type="circle"
             as="a"
             target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
             href={`https://linkedin.com/in/${userData.linkedinUser}`}
           >
             <FaLinkedinIn />

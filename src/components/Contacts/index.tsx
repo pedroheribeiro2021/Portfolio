@@ -15,8 +15,10 @@ import {
 import { FaWhatsapp, FaEnvelopeOpen, FaLinkedin } from "react-icons/fa";
 import { useRef } from "react";
 import { userData } from "@/utils/userData";
+import { useI18n } from "@/utils/i18n";
 
 export const Contacts = () => {
+  const { t } = useI18n();
   const ref = useRef(null);
 
   const linkedInUrl = `https://www.linkedin.com/in/${userData.linkedinUser}`;
@@ -31,9 +33,9 @@ export const Contacts = () => {
           <motion.div style={{ scale }}>
             <ContactSectionText>
               <Text type="heading2" color="grey4">
-                Vamos conversar e{" "}
+                {t("letsTalk")}{" "}
                 <Text as="span" type="heading2" color="brand1">
-                  desenvolver soluções para sua empresa
+                  {t("buildSolutions")}
                 </Text>
                 , juntos!
               </Text>
@@ -46,19 +48,20 @@ export const Contacts = () => {
               </ContactCardImage>
               <ContactCardContent>
                 <Text type="heading4" color="grey4">
-                  Meu Whatsapp
+                  {t("whatsapp")}
                 </Text>
                 <Text color="grey2" type="body2">
-                  Estou disponível para chat e ligação.
+                  {t("availableChat")}
                 </Text>
                 <Text
                   as="a"
                   color="grey2"
                   type="body2"
                   target="_blank"
+                  rel="noopener noreferrer"
                   href={`https://api.whatsapp.com/send?phone=+55+${userData.whatsappNumber}&text=Ol%C3%A1%2C%20venho%20por%20meio%20do%20seu%20portf%C3%B3lio%20na%20internet%2C%20gostaria%20de%20conhecer%20melhor%20seus%20servi%C3%A7os`}
                 >
-                  Vamos conversar
+                  {t("talk")}
                 </Text>
               </ContactCardContent>
             </ContactCard>
@@ -69,10 +72,10 @@ export const Contacts = () => {
               </ContactCardImage>
               <ContactCardContent>
                 <Text type="heading4" color="grey4">
-                  Meu email
+                  {t("email")}
                 </Text>
                 <Text color="grey2" type="body2">
-                  Envie emails com feedbacks ou reportando qualquer possível erro
+                  {t("emailDescription")}
                 </Text>
 
                 <Text
@@ -80,12 +83,13 @@ export const Contacts = () => {
                   color="grey2"
                   type="body2"
                   target="_blank"
-                  href={`mailto=${userData.emailUser}`}
+                  rel="noopener noreferrer"
+                  href={`mailto:${userData.emailUser}`}
                   onClick={() =>
                     (window.location.href = "mailto:pedro.heribeiro6795@gmail.com")
                   }
                 >
-                  Envie-me um email
+                  {t("sendEmail")}
                 </Text>
               </ContactCardContent>
             </ContactCard>
@@ -95,19 +99,20 @@ export const Contacts = () => {
               </ContactCardImage>
               <ContactCardContent>
                 <Text type="heading4" color="grey4">
-                  Meu LinkedIn
+                  {t("linkedin")}
                 </Text>
                 <Text color="grey2" type="body2">
-                Podemos criar interações mais constantes assim como um compartilhar network
+                {t("linkedinDescription")}
                 </Text>
                 <Text
                   as="a"
                   color="grey2"
                   type="body2"
                   target="_blank"
+                  rel="noopener noreferrer"
                   href={linkedInUrl}
                 >
-                  Ir para LinkedIn
+                  {t("goLinkedin")}
                 </Text>
               </ContactCardContent>
             </ContactCard>
