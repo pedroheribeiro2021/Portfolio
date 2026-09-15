@@ -33,7 +33,7 @@ import { useI18n } from "@/utils/i18n";
 export const Home = (): JSX.Element => {
   const { t } = useI18n();
   const gihubUrl = `https://github.com/${userData.githubUser}`;
-  const portfolioUrl = `https://github.com/${userData.githubUser}/Portifolio-V1`;
+  const portfolioUrl = `https://github.com/${userData.githubUser}/Portfolio`;
 
   return (
     <main id="home">
@@ -101,6 +101,8 @@ export const Home = (): JSX.Element => {
             {t("aboutText")}
             <br /><br />
             {t("aboutText2")}
+            <br /><br />
+            {t("aboutText3")}
           </Text>
         </Container>
       </AboutMeArea>
